@@ -1,9 +1,12 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import { TiLocationArrow } from "react-icons/ti";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -14,11 +17,27 @@ const Hero = () => {
   const nextVideoRef = useRef<HTMLVideoElement | null>(null);
   const upcomingVidIndex = (currentIndex % totalVideos) + 1; // Don't go past the number of videos available
 
+  const handleVideoLoad = () => {
+    setLoadedVideos((prev) => prev + 1);
+  };
+
   const handleMiniVdClick = () => {
     setHasClicked(true);
 
     setCurrentIndex(upcomingVidIndex);
   };
+
+  // Init UseEffect
+  useEffect(() => {
+    handleVideoLoad();
+  }, []);
+
+  // Loading Animation While Waiting for Videos
+  useEffect(() => {
+    if (loadedVideos === totalVideos - 1) {
+      setIsLoading(false);
+    }
+  }, [loadedVideos]);
 
   // GSAP ANIMATION - Video Player Expansion
   useGSAP(
@@ -76,12 +95,17 @@ const Hero = () => {
 
   const getVideoSource = (index: any) => `videos/hero-${index}.mp4`;
 
-  const handleVideoLoad = () => {
-    setLoadedVideos((prev) => prev + 1);
-  };
-
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
+      {isLoading && (
+        <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
+          <div className="three-body">
+            <div className="three-body__dot" />
+            <div className="three-body__dot" />
+            <div className="three-body__dot" />
+          </div>
+        </div>
+      )}
       <div
         id="video-frame"
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
