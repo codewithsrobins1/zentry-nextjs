@@ -12,7 +12,7 @@ const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [loadedVideos, setLoadedVideos] = useState(0);
+  const [loadedVideos, setLoadedVideos] = useState(3);
   const totalVideos = 4;
   const nextVideoRef = useRef<HTMLVideoElement | null>(null);
   const upcomingVidIndex = (currentIndex % totalVideos) + 1; // Don't go past the number of videos available
@@ -23,14 +23,8 @@ const Hero = () => {
 
   const handleMiniVdClick = () => {
     setHasClicked(true);
-
     setCurrentIndex(upcomingVidIndex);
   };
-
-  // Init UseEffect
-  useEffect(() => {
-    handleVideoLoad();
-  }, []);
 
   // Loading Animation While Waiting for Videos
   useEffect(() => {
@@ -123,7 +117,7 @@ const Hero = () => {
                 muted
                 id="current-video"
                 className="size-64 origin-center scale-150 object-cover object-center"
-                onLoadedData={handleVideoLoad}
+                onLoadedData={() => handleVideoLoad()}
               />
             </div>
           </div>
@@ -146,7 +140,7 @@ const Hero = () => {
             loop
             muted
             className="absolute left-0 top-0 size-full object-cover"
-            onLoadedData={handleVideoLoad}
+            onLoadedData={() => handleVideoLoad()}
           />
         </div>
 
