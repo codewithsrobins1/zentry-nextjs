@@ -37,8 +37,8 @@ export const About = () => {
         </h2>
 
         <AnimatedTitle
-          title="sadfasd"
-          containerClass="mt5 !text-black text-center"
+          title="Disc<b>o</b>ver the world's <br /> largest shared <b>a</b>dventure"
+          containerClass="mt-5 !text-black text-center"
         />
 
         <div className="about-subtext">

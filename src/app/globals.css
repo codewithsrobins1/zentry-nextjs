@@ -100,8 +100,13 @@ body {
 }
 
 /* Special font */
-@utility special-font-b {
+@utility special-font {
   font-family: "zentry";
+  font-feature-settings: "ss01" on;
+}
+
+.special-font b {
+  font-family: "Zentry";
   font-feature-settings: "ss01" on;
 }
 
@@ -127,8 +132,8 @@ body {
 
 /* Animated word */
 @utility animated-word {
-  @reference special-font font-zentry font-black opacity-0;
-  @reference transform translate3d(10px, 51px, -60px) rotateY(60deg) rotateX(-40deg);
+  @apply special-font font-zentry font-black opacity-0;
+  transform: translate3d(10px, 51px, -60px) rotateY(60deg) rotateX(-40deg);
   transform-origin: 50% 50% -150px !important;
   will-change: opacity, transform;
 }
