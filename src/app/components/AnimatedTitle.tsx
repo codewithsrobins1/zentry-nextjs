@@ -42,7 +42,7 @@ export const AnimatedTitle = ({ title, containerClass }: AnimatedTitle) => {
           {line.split(" ").map((word, i) => (
             <span
               key={i}
-              className="animated-word"
+              className="animated-word special-font font-zentry font-black opacity-0;"
               dangerouslySetInnerHTML={{ __html: word }}
             />
           ))}

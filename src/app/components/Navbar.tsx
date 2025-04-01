@@ -2,10 +2,53 @@
 import React, { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import { TiLocationArrow } from "react-icons/ti";
+import { useWindowScroll } from "react-use";
+import gsap from "gsap";
 
 export const Navbar = () => {
-  const navContainerRef = useRef(null);
+  const navContainerRef = useRef<HTMLDivElement | null>(null);
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isNavVisible, setIsNavVisible] = useState(true);
+  const { y: currentScrollY } = useWindowScroll();
+
+  // Navbar visibility during scrolling
+  useEffect(() => {
+    // If Top Most Position
+    if (currentScrollY === 0) {
+      setIsNavVisible(true);
+
+      if (navContainerRef && navContainerRef.current) {
+        navContainerRef.current.classList.remove("floating-nav");
+      }
+    }
+    // Instance where user is scrolling down and not up
+    else if (currentScrollY > lastScrollY) {
+      setIsNavVisible(false);
+      if (navContainerRef && navContainerRef.current) {
+        navContainerRef.current.classList.add("floating-nav");
+      }
+    }
+    // Scrolling Up
+    else if (currentScrollY < lastScrollY) {
+      setIsNavVisible(true);
+      if (navContainerRef && navContainerRef.current) {
+        navContainerRef.current.classList.add("floating-nav");
+      }
+    }
+
+    // Keep Track
+    setLastScrollY(currentScrollY);
+  }, [currentScrollY, lastScrollY]);
+
+  // Animation for Scrollbar
+  useEffect(() => {
+    gsap.to(navContainerRef.current, {
+      y: isNavVisible ? 0 : -100,
+      opacity: isNavVisible ? 1 : 0,
+      duration: 0.2,
+    });
+  }, [isNavVisible]);
 
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [isIndicatorActive, setIsIndicatorActive] = useState(false);
