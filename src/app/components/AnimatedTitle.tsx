@@ -3,10 +3,15 @@ import gsap from "gsap";
 
 interface AnimatedTitle {
   title: string;
-  containerClass: string;
+  sectionId?: string;
+  containerClass?: string;
 }
 
-export const AnimatedTitle = ({ title, containerClass }: AnimatedTitle) => {
+export const AnimatedTitle = ({
+  title,
+  sectionId,
+  containerClass,
+}: AnimatedTitle) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -33,7 +38,10 @@ export const AnimatedTitle = ({ title, containerClass }: AnimatedTitle) => {
   }, []);
 
   return (
-    <div ref={containerRef} className={`animated-title ${containerClass}`}>
+    <div
+      ref={containerRef}
+      className={`animated-title ${containerClass} max-w`}
+    >
       {title.split("<br />").map((line, index) => (
         <div
           key={index}
