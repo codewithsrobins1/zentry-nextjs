@@ -33,7 +33,7 @@ export const Contact = () => {
           />
         </div>
 
-        <div className="absolute -top-40 left-20 w-60 sm:top-1/2 md:left-auto md:right-10 lg:top-20 lg:w-80">
+        <div className="absolute -top-40 left-[calc(60%-120px)] w-60 sm:top-1/2 md:left-auto md:right-10 lg:top-20 lg:w-80">
           <ImageClipBox
             src="img/swordman-partial.webp"
             clipClass="absolute md:scale-125"
@@ -48,7 +48,7 @@ export const Contact = () => {
 
         <div className="flex flex-col items-center text-center">
           <p className="font-general text-[10px] uppercase">Join Zentry</p>
-          <p className="special-font mt-10 w-full font-zentry text-5xl leading-[0.9] md:text-[6rem] max-w-150 m-auto">
+          <p className="special-font mt-10 w-full font-zentry text-5xl leading-[0.9] md:text-[6rem] max-w-150 m-auto z-50">
             Join the new era of gaming
           </p>
           <Button title="contact us" containerClass="mt-10 cursor-pointer" />

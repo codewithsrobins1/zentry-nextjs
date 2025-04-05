@@ -15,6 +15,8 @@ export const Navbar = () => {
   const [isNavVisible, setIsNavVisible] = useState(true);
   const { y: currentScrollY } = useWindowScroll();
 
+  const navItems = ["Nexus", "Vault", "Prologue", "About", "Contact"];
+
   // Navbar visibility during scrolling
   useEffect(() => {
     // If Top Most Position
@@ -52,16 +54,6 @@ export const Navbar = () => {
       duration: 0.2,
     });
   }, [isNavVisible]);
-
-  // const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  // const [isIndicatorActive, setIsIndicatorActive] = useState(false);
-
-  const navItems = ["Nexus", "Vault", "Prologue", "About", "Contact"];
-
-  // const toggleAudioIndicator = () => {
-  //   setIsAudioPlaying((prev) => !prev);
-  //   setIsIndicatorActive((prev) => !prev);
-  // };
 
   useEffect(() => {
     if (isAudioPlaying && audioElementRef.current) {
