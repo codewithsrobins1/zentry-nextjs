@@ -5,10 +5,13 @@ import { TiLocationArrow } from "react-icons/ti";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { useAppContext } from "../context/AppContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
+  const { isAudioPlaying, isIndicatorActive, toggleAudioIndicator } =
+    useAppContext();
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -158,10 +161,11 @@ const Hero = () => {
               Enter the Metagame Layer <br /> Unleash the Play Economy
             </p>
             <Button
-              id="watch-trailer"
-              title="Watch Trailer"
+              id="theme-song-player"
+              title="Play Theme Song"
               leftIcon={<TiLocationArrow />}
               containerClass="!bg-yellow-300 flex-center gap-1"
+              onClick={toggleAudioIndicator}
             />
           </div>
         </div>
